@@ -1,0 +1,16 @@
+nav  {
+  display: flex;
+  justify-content:flex-end;
+}
+
+nav p {
+  font-size: 1.5rem;
+  text-decoration: underline;
+  margin: 0px;
+  padding: 1.5rem;
+}
+
+nav p:hover {
+  color: grey;
+  cursor: pointer;
+}

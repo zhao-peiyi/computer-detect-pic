@@ -1,0 +1,23 @@
+.face {
+  width: 500 px;
+  height: auto;
+  margin-top: 1rem;
+}
+
+.area {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  position: absolute;
+}
+
+.boundingBox {
+  position: absolute;
+  box-shadow: 0 0 0 3px blue inset;
+  display: flex;
+  justify-content: center;
+  cursor: pinoter;
+
+}
