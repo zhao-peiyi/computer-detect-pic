@@ -1,18 +1,17 @@
 import './SignIn.css';
 
-const SignIn= () => {
+const SignIn= (props) => {
   return(
     <form id="sign">
         <h1>Sign In</h1>
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" id="email"/>
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input type="password" id="password"/>
-        <button>Sign in</button>
-        <a href="www.baidu.com">Register</a>
+        <button onClick={ () => props.onRouteChange('homepage') }>Sign in</button>
+        <p onClick={ () => props.onRouteChange('register') }>Register</p>
     </form>
   );
-
 }
 
 export default SignIn;
