@@ -39,6 +39,12 @@ class App extends React.Component {
     }
   }
 
+  // componentDidMount(){
+  //   fetch('http://localhost:2000')
+  //     .then(response => response.json())
+  //     .then(console.log);
+  // }
+
   calculateFaceLocation = (response) => {
     const image = document.getElementById('faceImage');
     const width = Number(image.width);
