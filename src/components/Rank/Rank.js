@@ -1,10 +1,10 @@
 import './Rank.css';
 
-const Rank = () => {
+const Rank = (props) => {
   return (
     <div className="Rank">
-      <div>{'Andrei, your current rank is... '}</div>
-      <div className="number">{'#5'}</div>
+      <div>{`${props.profile.name}, your current entry count is... `}</div>
+      <div className="number">{`#${props.profile.sum}`}</div>
     </div>
   );
 }

@@ -36,6 +36,13 @@ class App extends React.Component {
       box: {},
       route:'signin',
       isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        sum: 0,
+        joined: '',
+      },
     }
   }
 
@@ -44,6 +51,18 @@ class App extends React.Component {
   //     .then(response => response.json())
   //     .then(console.log);
   // }
+
+  loadUser = (user) => {
+    this.setState({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        sum: user.sum,
+        joined: user.joined,
+      },
+    })
+  }
 
   calculateFaceLocation = (response) => {
     const image = document.getElementById('faceImage');
@@ -63,13 +82,24 @@ class App extends React.Component {
     this.setState({ input: event.target.value });
   };
 
-  onClickMouse = (event) => {
+  onPictureSubmit = (event) => {
     this.setState({ imageURL: this.state.input });
 
     app.models.predict( Clarifai.FACE_DETECT_MODEL, this.state.input )
     .then( response => {
+      if (response) {
+        fetch('http://localhost:2000/image', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ id: this.state.user.id}),
+        })
+        .then( response => response.json())
+        .then(data => {
+          this.setState( Object.assign(this.state.user, {sum: data,}) )
+        });
+      }
       this.calculateFaceLocation(response);
-      console.log(this.state.box);} )
+    })
     .catch( error => console.log(error) );
   };
 
@@ -90,13 +120,13 @@ class App extends React.Component {
         <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
         {
           (this.state.route === 'signin')
-          ? <SignIn onRouteChange={this.onRouteChange}/>
+          ? <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
           : (this.state.route === 'register')
-            ? <Register onRouteChange={this.onRouteChange}/>
+            ? <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
             : <>
               <Logo />
-              <Rank />
-              <ImageLinkForm onInputChange={this.onInputChange} onClickMouse={this.onClickMouse}/>
+              <Rank profile={this.state.user}/>
+              <ImageLinkForm onInputChange={this.onInputChange} onClickMouse={this.onPictureSubmit}/>
               <FaceRecognition link={this.state.imageURL} box={this.state.box}/>
             </>
         }
