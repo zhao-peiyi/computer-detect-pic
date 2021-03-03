@@ -4,7 +4,7 @@ const Navigation = (props) => {
   if (props.isSignedIn) {
     return (
       <nav>
-        <p onClick={() => props.onRouteChange('signin') }>Sign Out</p>
+        <p onClick={() => props.onRouteChange('signout') }>Sign Out</p>
       </nav>
     );
   } else {

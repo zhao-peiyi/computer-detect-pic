@@ -27,30 +27,26 @@ const particleOptions = {
   }
 };
 
+const initialState = {
+  input: '',
+  imageURL: '',
+  box: {},
+  route:'signin',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    sum: 0,
+    joined: '',
+  }
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-      imageURL: '',
-      box: {},
-      route:'signin',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        sum: 0,
-        joined: '',
-      },
-    }
+    this.state = initialState;
   }
-
-  // componentDidMount(){
-  //   fetch('http://localhost:2000')
-  //     .then(response => response.json())
-  //     .then(console.log);
-  // }
 
   loadUser = (user) => {
     this.setState({
@@ -85,7 +81,7 @@ class App extends React.Component {
   onPictureSubmit = (event) => {
     this.setState({ imageURL: this.state.input });
 
-    app.models.predict( Clarifai.FACE_DETECT_MODEL, this.state.input ) 
+    app.models.predict( Clarifai.FACE_DETECT_MODEL, this.state.input )
     .then( response => {
       if (response) {
         fetch('http://localhost:2000/image', {
@@ -108,7 +104,9 @@ class App extends React.Component {
 
     if(route === 'homepage') {
       this.setState({ isSignedIn: true });
-    } else {
+    } else if(route ==='signout'){
+      this.setState(initialState);
+    }  else {
       this.setState({ isSignedIn: false });
     }
   };
@@ -119,7 +117,7 @@ class App extends React.Component {
         <Particles className="Particles" params={particleOptions}/>
         <Navigation isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
         {
-          (this.state.route === 'signin')
+          (this.state.route === 'signin' || this.state.route === 'signout')
           ? <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
           : (this.state.route === 'register')
             ? <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
@@ -130,7 +128,6 @@ class App extends React.Component {
               <FaceRecognition link={this.state.imageURL} box={this.state.box}/>
             </>
         }
-
       </div>
     );
   }
