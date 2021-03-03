@@ -58,7 +58,7 @@ class App extends React.Component {
         id: user.id,
         name: user.name,
         email: user.email,
-        sum: user.sum,
+        sum: user.entries,
         joined: user.joined,
       },
     })
@@ -85,7 +85,7 @@ class App extends React.Component {
   onPictureSubmit = (event) => {
     this.setState({ imageURL: this.state.input });
 
-    app.models.predict( Clarifai.FACE_DETECT_MODEL, this.state.input )
+    app.models.predict( Clarifai.FACE_DETECT_MODEL, this.state.input ) 
     .then( response => {
       if (response) {
         fetch('http://localhost:2000/image', {

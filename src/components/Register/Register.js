@@ -26,7 +26,7 @@ class Register extends React.Component {
     })
     .then(response=>response.json())
     .then(data => {
-      if(data) {
+      if(data !== 'There is an error.') {
         this.props.loadUser(data);
         this.props.onRouteChange('homepage');
       }
