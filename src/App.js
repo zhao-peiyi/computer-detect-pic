@@ -9,11 +9,6 @@ import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
-
-const app = new Clarifai.App({
- apiKey: '0b49f43c7bb345c7b14b69292e9a7352'
-});
 
 const particleOptions = {
   particles: {
@@ -81,22 +76,26 @@ class App extends React.Component {
   onPictureSubmit = (event) => {
     this.setState({ imageURL: this.state.input });
 
-    app.models.predict( Clarifai.FACE_DETECT_MODEL, this.state.input )
-    .then( response => {
-      if (response) {
+    fetch('http://localhost:2000/imageURL', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ input: this.state.input })
+    })
+    .then( response => response.json())
+    .then( data => {
+      this.calculateFaceLocation(data);
+      if (data) {
         fetch('http://localhost:2000/image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({ id: this.state.user.id}),
         })
         .then( response => response.json())
-        .then(data => {
-          this.setState( Object.assign(this.state.user, {sum: data,}) )
-        });
+        .then( data => this.setState( Object.assign(this.state.user, {sum: data,})) )
+        .catch( err => console.log(err) );
       }
-      this.calculateFaceLocation(response);
     })
-    .catch( error => console.log(error) );
+    .catch( err => console.log(err) );
   };
 
   onRouteChange = (route) => {
