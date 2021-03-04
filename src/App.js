@@ -76,7 +76,7 @@ class App extends React.Component {
   onPictureSubmit = (event) => {
     this.setState({ imageURL: this.state.input });
 
-    fetch('http://localhost:2000/imageURL', {
+    fetch('https://obscure-river-59267.herokuapp.com/imageURL', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ input: this.state.input })
@@ -85,7 +85,7 @@ class App extends React.Component {
     .then( data => {
       this.calculateFaceLocation(data);
       if (data) {
-        fetch('http://localhost:2000/image', {
+        fetch('https://obscure-river-59267.herokuapp.com/image', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({ id: this.state.user.id}),
