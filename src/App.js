@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
 import Navigation from './components/Navigation/Navigation';
-import Logo from './components/Logo/Logo';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import Homepage from './components/Homepage/Homepage';
+
 import Rank from './components/Rank/Rank';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+
+// import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 
@@ -120,12 +121,9 @@ class App extends React.Component {
           ? <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
           : (this.state.route === 'register')
             ? <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-            : <>
-              <Logo />
-              <Rank profile={this.state.user}/>
-              <ImageLinkForm onInputChange={this.onInputChange} onClickMouse={this.onPictureSubmit}/>
-              <FaceRecognition link={this.state.imageURL} box={this.state.box}/>
-            </>
+            : (this.state.route === 'homepage')
+              ? <Homepage onInputChange={this.onInputChange} onClickMouse={this.onPictureSubmit}/>
+              : <Rank/>
         }
       </div>
     );

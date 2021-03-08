@@ -1,0 +1,8 @@
+
+//     : <>
+//       <Logo />
+//       <Rank profile={this.state.user}/>
+//       
+//       <FaceRecognition link={this.state.imageURL} box={this.state.box}/>
+//     </>
+// }

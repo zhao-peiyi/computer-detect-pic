@@ -4,8 +4,8 @@ nav  {
 }
 
 nav p {
-  font-size: 1.5rem;
-  text-decoration: underline;
+  color: white;
+  font-size: 1rem;
   margin: 0px;
   padding: 1.5rem;
 }
@@ -13,4 +13,11 @@ nav p {
 nav p:hover {
   color: grey;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  nav  {
+    justify-content:center;
+  }
+
 }

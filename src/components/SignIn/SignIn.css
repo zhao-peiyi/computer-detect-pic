@@ -1,6 +1,7 @@
 #sign {
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  color: white;
+  border-radius: 30px;
+  /* border: 2px solid #ffa567; */
   margin: 5rem auto;
   width: 400px;
   display: flex;
@@ -8,6 +9,8 @@
   align-items: center;
   flex-direction: column;
   padding-bottom: 3rem;
+  /* background-color: rgba(0, 0, 0, 0.8); */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #sign h1 {
@@ -27,21 +30,26 @@
   width: 50%;
   height: 22px;
   padding: 6px;
+  padding-left: 16px;
   font-size: 1.25rem;
-  background-color: rgba(0, 0, 0, 0);
-  border: 2px solid black;
+  background-image: linear-gradient(to right, #ffa567, #ed2979 20%, #ed2979 80%, #ffa567);
+  color: white;
+  border: 0px;
+  border-radius: 22px;
 }
 
 #sign input:hover, #sign input:focus{
-  background-color: black;
+  background-image: linear-gradient(to right, #ed2979, #ed2979);
   color: white;
 }
 
 #sign button {
   display: block;
   padding: 6px 20px;
-  background-color: rgba(0, 0, 0, 0);
-  border: 2px solid black;
+  border-radius: 22px;
+  background: linear-gradient(to right, #ed2979, #ed2979);
+  color: white;
+  border: 2px solid white;
   font-size: 1.2rem;
   font-weight: 500;
   margin-top: 2.5rem;
